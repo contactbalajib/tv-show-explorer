@@ -1,0 +1,58 @@
+# Angular build output
+/dist/
+/out-tsc/
+/tmp/
+/build/
+
+# Angular environment files
+/src/environments/environment*.ts
+
+# Node modules
+/node_modules/
+
+# IDE and editor folders
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# IDE and editor folders
+.angular/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Compiled TypeScript
+*.js
+*.js.map
+
+# Coverage reports
+/coverage/
+
+# Angular cache
+.angular/
+
+# node modules
+/node_module/
+
+# NPM package lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Optional: Ignore test coverage and reports
+/test-results/
+/reports/
+
+# Optional: Ignore Firebase or other deployment configs
+/firebase.json
+/.firebaserc
+
+# Optional: Ignore environment-specific files
+.env
+.env.local
+.env.*.local

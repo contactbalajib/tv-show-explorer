@@ -1,0 +1,11 @@
+<div class="card">
+  <img [src]="image(show?.image?.medium || show?.image?.original)" [alt]="show.name">
+  <div class="content">
+    <div class="row" style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+      <h3 style="margin:0; font-size:18px;">{{show.name}}</h3>
+      <app-rating [value]="show.rating?.average ?? null"></app-rating>
+    </div>
+    <div class="muted" style="font-size:12px;color:#666;">{{show.genres?.join(', ')}}</div>
+    <a [routerLink]="['/shows', show.id]" class="btn">View Details</a>
+  </div>
+</div>

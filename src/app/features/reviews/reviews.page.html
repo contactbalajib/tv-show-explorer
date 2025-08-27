@@ -1,0 +1,45 @@
+<h1>Reviews</h1>
+<form [formGroup]="form" (ngSubmit)="editingId()? update() : submit()" class="grid" style="grid-template-columns: 1fr 1fr;">
+  <div class="form-field">
+    <label>Show ID</label>
+    <input type="number" formControlName="showId" placeholder="Enter show ID (from URL)">
+    <div class="error" *ngIf="form.get('showId')?.touched && form.get('showId')?.invalid">Show ID is required</div>
+  </div>
+  <div class="form-field">
+    <label>Rating</label>
+    <select formControlName="rating">
+      <option *ngFor="let r of [1,2,3,4,5]" [value]="r">{{r}}</option>
+    </select>
+  </div>
+  <div class="form-field" style="grid-column: 1/-1;">
+    <label>Comments</label>
+    <textarea rows="3" formControlName="comment" placeholder="Your thoughts..."></textarea>
+    <div class="error" *ngIf="form.get('comment')?.touched && form.get('comment')?.invalid">Comment is required (min 5 chars)</div>
+  </div>
+  <div style="grid-column: 1/-1; display:flex; gap:8px;">
+    <button type="submit" [disabled]="form.invalid">{{editingId()? 'Update' : 'Add'}} Review</button>
+    <button type="button" (click)="cancel()" *ngIf="editingId()">Cancel</button>
+  </div>
+</form>
+
+<hr>
+<div *ngIf="(reviews$ | async) as reviews">
+  <h2>Submitted Reviews ({{reviews.length}})</h2>
+  <div *ngIf="!reviews.length" class="muted">No reviews yet. Add one above.</div>
+  <div class="grid">
+    <div class="card" *ngFor="let r of reviews">
+      <div class="content">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <strong>Show #{{r.showId}}</strong>
+          <span class="badge">⭐ {{r.rating}}</span>
+        </div>
+        <p>{{r.comment}}</p>
+        <div class="muted">{{r.createdAt | date:'medium'}}</div>
+        <div style="display:flex; gap:8px;">
+          <button (click)="edit(r)">Edit</button>
+          <button (click)="remove(r.id)" style="background:#b00020">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

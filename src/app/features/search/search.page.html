@@ -1,0 +1,21 @@
+<form [formGroup]="form" class="container" style="display:flex; gap:8px; align-items:center; margin-bottom:16px;">
+  <div class="form-field" style="flex:1;">
+    <input type="search" placeholder="Search TV shows..." formControlName="q" aria-label="Search shows" />
+    <div class="error" *ngIf="form.get('q')?.touched && form.get('q')?.invalid">Enter at least 2 characters</div>
+  </div>
+  <button type="button" (click)="page.set(1)" [disabled]="form.invalid">Search</button>
+</form>
+
+<app-loader [show]="loading()"></app-loader>
+<app-error [message]="error()"></app-error>
+
+<div class="grid" *ngIf="!loading() && paged.length">
+  <app-show-card *ngFor="let s of paged" [show]="s"></app-show-card>
+</div>
+<div *ngIf="!loading() && !paged.length && form.get('q')?.value">No results found.</div>
+
+<div style="display:flex; gap:8px; align-items:center; margin-top:12px;" *ngIf="shows().length">
+  <button (click)="prev()" [disabled]="page()===1">Prev</button>
+  <span>Page {{page()}} of {{totalPages()}}</span>
+  <button (click)="next()" [disabled]="page()===totalPages()">Next</button>
+</div>
