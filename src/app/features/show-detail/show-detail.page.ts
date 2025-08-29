@@ -11,7 +11,12 @@ import { LoaderComponent } from '../../shared/components/loader/loader.component
 @Component({
   selector: 'app-show-detail-page',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, LoaderComponent, RouterLink],
+  imports: [
+    CommonModule,
+    //NgOptimizedImage,
+    LoaderComponent,
+    RouterLink
+  ],
   templateUrl: './show-detail.page.html',
   styleUrl: './show-detail.page.css'
 })
