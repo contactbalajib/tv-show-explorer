@@ -63,7 +63,7 @@ export class ShowDetailPageComponent {
 constructor() {
     // Allow writing to signals within this effect
     effect(() => {
-      const param = this.route.snapshot.paramMap.get('id');
+      const param = this.route.snapshot.paramMap?.get('id');
       const id = Number(param);
       this.id.set(id);
       this.loading.set(true);

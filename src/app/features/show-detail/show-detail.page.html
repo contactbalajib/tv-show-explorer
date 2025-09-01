@@ -1,7 +1,7 @@
 <app-loader [show]="loading()"></app-loader>
 <section *ngIf="show() as s">
   <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap: wrap;">
-    <img [ngSrc]="s.image?.original || s.image?.medium || 'https://placehold.co/600x800'" width="300" height="450" alt="{{s.name}}" style="border-radius:8px; object-fit:cover;">
+    <img [src]="s.image?.original || s.image?.medium || 'https://placehold.co/600x800'" width="300" height="450" alt="{{s.name}}" style="border-radius:8px; object-fit:cover;">
     <div style="flex:1; min-width:260px;">
       <h1 style="margin-top:0;">{{s.name}}</h1>
       <div class="muted">{{s.genres?.join(', ')}}</div>
