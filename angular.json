@@ -60,6 +60,12 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "src/**/*.spec.ts",
+              "src/test.ts",
+              "src/environments/**"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

@@ -6,6 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test --watch=false",
+    "build:coverage": "ng build --source-map",
+    "test:coverage": "ng test --code-coverage --watch=false --browsers=ChromeHeadless",
+    "build:prod:coverage": "ng build --configuration production --source-map",
     "lint": "echo 'No lint configured'"
   },
   "dependencies": {
