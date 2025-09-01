@@ -1,7 +1,8 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, computed } from '@angular/core';
 import { CommonModule, NgOptimizedImage, DOCUMENT } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TvMazeApiService } from '../../core/services/tvmaze-api.service';
+import { ReviewsStorageService } from '../../core/services/reviews-storage.service';
 import { Show } from '../../core/models/show.model';
 import { CastItem } from '../../core/models/cast.model';
 import { Episode } from '../../core/models/episode.model';
@@ -10,20 +11,40 @@ import { LoaderComponent } from '../../shared/components/loader/loader.component
 @Component({
   selector: 'app-show-detail-page',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, LoaderComponent],
+  imports: [
+    CommonModule,
+    //NgOptimizedImage,
+    LoaderComponent,
+    RouterLink
+  ],
   templateUrl: './show-detail.page.html',
   styleUrl: './show-detail.page.css'
 })
 export class ShowDetailPageComponent {
   private route = inject(ActivatedRoute);
   private api = inject(TvMazeApiService);
-  private doc = inject(DOCUMENT); 
+  private doc = inject(DOCUMENT);
+  private reviewsStorage = inject(ReviewsStorageService);
 
   id = signal<number>(0);
   loading = signal(true);
   show = signal<Show | null>(null);
   cast = signal<CastItem[]>([]);
   episodes = signal<Episode[]>([]);
+  
+  // Computed property to get reviews for this specific show
+  showReviews = computed(() => {
+    const showId = this.id();
+    return showId ? this.reviewsStorage.getReviewsByShow(showId) : [];
+  });
+  
+  // Computed property for average rating
+  averageRating = computed(() => {
+    const reviews = this.showReviews();
+    if (reviews.length === 0) return 0;
+    const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
+    return Math.round((sum / reviews.length) * 10) / 10; // Round to 1 decimal place
+  });
 
   // constructor() {
   //   effect(() => {

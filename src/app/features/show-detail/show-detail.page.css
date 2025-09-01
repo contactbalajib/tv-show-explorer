@@ -1,1 +1,147 @@
+/* Reviews Summary Styling */
+.reviews-summary {
+  background: #f5f5f5;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.reviews-summary h3 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.average-rating {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff9800;
+}
+
+.review-count {
+  color: #666;
+  font-size: 14px;
+}
+
+.add-review-link {
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.add-review-link:hover {
+  text-decoration: underline;
+}
+
+.no-reviews {
+  background: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.no-reviews p {
+  margin: 0 0 8px 0;
+  color: #666;
+}
+
+/* Reviews Grid */
+.reviews-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  margin-bottom: 32px;
+}
+
+.review-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.review-rating {
+  background: #ff9800;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.review-date {
+  color: #666;
+  font-size: 12px;
+}
+
+.review-comment {
+  margin: 0;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* General styling improvements */
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card .content {
+  padding: 12px;
+}
+
+.muted {
+  color: #666;
+  font-size: 14px;
+}
+
+button {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background: #1565c0;
+}
 
