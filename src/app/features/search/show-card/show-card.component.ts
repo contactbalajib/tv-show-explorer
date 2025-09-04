@@ -1,12 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Show } from '../../../core/models/show.model';
-import { RatingComponent } from '../../../shared/components/rating/rating.component';
 
 @Component({
   selector: 'app-show-card',
   standalone: true,
-  imports: [RouterLink, RatingComponent],
+  imports: [RouterLink],
   templateUrl: './show-card.component.html',
   styleUrl: './show-card.component.css'
 })

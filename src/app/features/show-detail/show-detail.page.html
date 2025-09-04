@@ -8,38 +8,13 @@
       <div class="muted">Language: {{s.language}} | Premiered: {{s.premiered}} | Network: {{s.network?.name}}</div>
       <div class="muted">Rating: {{s.rating?.average || 'N/A'}}</div>
       
-      <!-- User Reviews Summary -->
-      <div *ngIf="showReviews().length > 0" class="reviews-summary">
-        <h3>User Reviews</h3>
-        <div class="rating-summary">
-          <span class="average-rating">⭐ {{averageRating()}}</span>
-          <span class="review-count">({{showReviews().length}} review{{showReviews().length !== 1 ? 's' : ''}})</span>
-        </div>
-        <a routerLink="/reviews" class="add-review-link">Add your review</a>
-      </div>
-      <div *ngIf="showReviews().length === 0" class="no-reviews">
-        <p>No user reviews yet.</p>
-        <a routerLink="/reviews" class="add-review-link">Be the first to review!</a>
-      </div>
+      
       
       <hr>
       <div [innerHTML]="s.summary"></div>
     </div>
   </div>
 
-  <!-- User Reviews Section -->
-  <section *ngIf="showReviews().length > 0">
-    <h2>User Reviews</h2>
-    <div class="reviews-grid">
-      <div class="review-card" *ngFor="let review of showReviews()">
-        <div class="review-header">
-          <span class="review-rating">⭐ {{review.rating}}</span>
-          <span class="review-date">{{review.createdAt | date:'short'}}</span>
-        </div>
-        <p class="review-comment">{{review.comment}}</p>
-      </div>
-    </div>
-  </section>
 
   <h2>Cast</h2>
   <div class="grid">
