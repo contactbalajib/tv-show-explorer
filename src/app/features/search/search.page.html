@@ -1,7 +1,7 @@
 <form [formGroup]="form" class="container" style="display:flex; gap:8px; align-items:center; margin-bottom:16px;">
   <div class="form-field" style="flex:1;">
     <input type="search" placeholder="Search TV shows..." formControlName="q" aria-label="Search shows" />
-    <div class="error" *ngIf="form.get('q')?.touched && form.get('q')?.invalid">Enter at least 2 characters</div>
+    <div class="error" *ngIf="form.get('q')?.touched && form.get('q')?.invalid">Enter at least 3 characters</div>
   </div>
   <button type="button" (click)="page.set(1)" [disabled]="form.invalid">Search</button>
 </form>

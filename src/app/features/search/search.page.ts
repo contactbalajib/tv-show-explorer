@@ -26,7 +26,7 @@ export class SearchPageComponent {
   page = signal(1);
   pageSize = 3;
 
-  form = this.fb.group({ q: ['', [Validators.required, Validators.minLength(2)]] });
+  form = this.fb.group({ q: ['', [Validators.required, Validators.minLength(3)]] });
 
   constructor() {
     this.form.get('q')!.valueChanges!.pipe(
@@ -34,7 +34,7 @@ export class SearchPageComponent {
       distinctUntilChanged(),
       tap(() => { this.loading.set(true); this.error.set(''); this.page.set(1); }),
       switchMap(q => {
-        if (!q || (q as string).length < 2) { this.loading.set(false); this.shows.set([]); return of([] as SearchResult[]); }
+        if (!q || (q as string).length < 3) { this.loading.set(false); this.shows.set([]); return of([] as SearchResult[]); }
         return this.api.searchShows(String(q)).pipe(
           catchError(err => { this.error.set('Failed to load shows'); return of([] as SearchResult[]); })
         );
