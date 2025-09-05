@@ -13,7 +13,7 @@ import { LoaderComponent } from '../../shared/components/loader/loader.component
   standalone: true,
   imports: [
     CommonModule,
-    //NgOptimizedImage,
+    NgOptimizedImage,
     LoaderComponent,
     RouterLink
   ],
