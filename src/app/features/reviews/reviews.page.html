@@ -1,20 +1,24 @@
 <h1>Reviews</h1>
 
 <!-- Loading indicator -->
-<div *ngIf="loading()" class="loading-indicator">
-  <p>Loading...</p>
-</div>
+@if (loading()) {
+  <div>Loading...</div>
+}
 
 <!-- Error and notification display -->
-<div *ngIf="uiStorage.uiState().error" class="error-message">
-  {{ uiStorage.uiState().error }}
-  <button (click)="uiStorage.clearError()">×</button>
-</div>
+@if (uiStorage.uiState().error) {
+  <div class="error-message">
+    {{ uiStorage.uiState().error }}
+    <button (click)="uiStorage.clearError()">×</button>
+  </div>
+}
 
-<div *ngIf="uiStorage.uiState().notification" class="notification-message">
-  {{ uiStorage.uiState().notification }}
-  <button (click)="uiStorage.clearNotification()">×</button>
-</div>
+@if (uiStorage.uiState().notification) {
+  <div class="notification-message">
+    {{ uiStorage.uiState().notification }}
+    <button (click)="uiStorage.clearNotification()">×</button>
+  </div>
+}
 
 <form [formGroup]="form" (ngSubmit)="editingId()? update() : submit()" class="grid" style="grid-template-columns: 1fr 1fr;">
   <div class="form-field">
