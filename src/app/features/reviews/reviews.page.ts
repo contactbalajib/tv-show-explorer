@@ -111,23 +111,6 @@ export class ReviewsPageComponent {
     return this.reviewsStorage.getReviewsByShow(showId);
   }
 
-  // Export reviews data
-  exportReviews() {
-    try {
-      const data = this.reviewsStorage.exportData();
-      const blob = new Blob([data], { type: 'application/json' });
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `tv-show-reviews-${new Date().toISOString().split('T')[0]}.json`;
-      link.click();
-      window.URL.revokeObjectURL(url);
-      this.uiStorage.showNotification('Reviews exported successfully!');
-    } catch (error) {
-      this.uiStorage.showError('Failed to export reviews');
-    }
-  }
-
   // Clear all reviews
   clearAllReviews() {
     if (confirm('Are you sure you want to delete ALL reviews? This cannot be undone.')) {

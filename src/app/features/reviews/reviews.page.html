@@ -36,14 +36,9 @@
   <div style="grid-column: 1/-1; display:flex; gap:8px;">
     <button type="submit" [disabled]="form.invalid || loading()">{{editingId()? 'Update' : 'Add'}} Review</button>
     <button type="button" (click)="cancel()" *ngIf="editingId()">Cancel</button>
+     <button (click)="clearAllReviews()" [disabled]="reviews().length === 0" style="background: #b00020;">Clear All</button>
   </div>
 </form>
-
-<!-- Management buttons -->
-<div class="management-buttons" style="margin: 1rem 0; display: flex; gap: 8px;">
-  <button (click)="exportReviews()" [disabled]="reviews().length === 0">Export Reviews</button>
-  <button (click)="clearAllReviews()" [disabled]="reviews().length === 0" style="background: #b00020;">Clear All</button>
-</div>
 
 <hr>
 <div>
