@@ -1,23 +1,8 @@
 <h1>Reviews</h1>
 
 <!-- Loading indicator -->
-@if (loading()) {
+@if (loading | async) {
   <div>Loading...</div>
-}
-
-<!-- Error and notification display -->
-@if (uiStorage.uiState().error) {
-  <div class="error-message">
-    {{ uiStorage.uiState().error }}
-    <button (click)="uiStorage.clearError()">×</button>
-  </div>
-}
-
-@if (uiStorage.uiState().notification) {
-  <div class="notification-message">
-    {{ uiStorage.uiState().notification }}
-    <button (click)="uiStorage.clearNotification()">×</button>
-  </div>
 }
 
 <form [formGroup]="form" (ngSubmit)="editingId()? update() : submit()" class="grid" style="grid-template-columns: 1fr 1fr;">
@@ -38,18 +23,20 @@
     <div class="error" *ngIf="form.get('comment')?.touched && form.get('comment')?.invalid">Comment is required (min 5 chars)</div>
   </div>
   <div style="grid-column: 1/-1; display:flex; gap:8px;">
-    <button type="submit" [disabled]="form.invalid || loading()">{{editingId()? 'Update' : 'Add'}} Review</button>
+    <button type="submit" [disabled]="form.invalid || (loading | async)">{{editingId()? 'Update' : 'Add'}} Review</button>
     <button type="button" (click)="cancel()" *ngIf="editingId()">Cancel</button>
-     <button (click)="clearAllReviews()" [disabled]="reviews().length === 0" style="background: #b00020;">Clear All</button>
+     <button (click)="clearAllReviews()" [disabled]="(reviews | async)?.length === 0" style="background: #b00020;">Clear All</button>
   </div>
 </form>
 
 <hr>
 <div>
-  <h2>Submitted Reviews ({{reviews().length}})</h2>
-  <div *ngIf="!reviews().length" class="muted">No reviews yet. Add one above.</div>
+  <h2>Submitted Reviews ({{(reviews | async)?.length}})</h2>
+  @if (!(reviews | async)?.length) {
+    <div class="muted">No reviews yet. Add one above.</div>
+  }
   <div class="grid">
-    <div class="card" *ngFor="let r of reviews()">
+    <div class="card" *ngFor="let r of (reviews | async)">
       <div class="content">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <strong>Show #{{r.showId}}</strong>
@@ -58,8 +45,8 @@
         <p>{{r.comment}}</p>
         <div class="muted">{{r.createdAt | date:'medium'}}</div>
         <div style="display:flex; gap:8px;">
-          <button (click)="edit(r)" [disabled]="loading()">Edit</button>
-          <button (click)="remove(r.id)" [disabled]="loading()" style="background:#b00020">Delete</button>
+          <button (click)="edit(r)" [disabled]="loading | async">Edit</button>
+          <button (click)="remove(r.id)" [disabled]="loading | async" style="background:#b00020">Delete</button>
         </div>
       </div>
     </div>
