@@ -33,46 +33,56 @@
   </div>
 
   <!-- User Reviews Section -->
-  <section *ngIf="showReviews().length > 0">
-    <h2>User Reviews</h2>
-    <div class="reviews-grid">
-      <div class="review-card" *ngFor="let review of showReviews()">
-        <div class="review-header">
-          <span class="review-rating">⭐ {{review.rating}}</span>
-          <span class="review-date">{{review.createdAt | date:'short'}}</span>
-        </div>
-        <p class="review-comment">{{review.comment}}</p>
+  @if (showReviews().length > 0) {
+    <section>
+      <h2>User Reviews</h2>
+      <div class="reviews-grid">
+        @for (review of showReviews(); track review.id) {
+          <div class="review-card">
+            <div class="review-header">
+              <span class="review-rating">⭐ {{review.rating}}</span>
+              <span class="review-date">{{review.createdAt | date:'short'}}</span>
+            </div>
+            <p class="review-comment">{{review.comment}}</p>
+          </div>
+        }
       </div>
-    </div>
-  </section>
+    </section>
+  }
 
   <h2>Cast</h2>
   <div class="grid">
-    <div class="card" *ngFor="let c of cast()">
-      <img  [src]="c.person.image?.medium || c.person.image?.original || 'https://placehold.co/400x400'" alt="{{c.person.name}}" priority>
-      <div class="content">
-        <strong>{{c.person.name}}</strong>
-        <div class="muted">as {{c.character.name}}</div>
+    @for (c of cast(); track c.person.id) {
+      <div class="card">
+        <img [src]="c.person.image?.medium || c.person.image?.original || 'https://placehold.co/400x400'" alt="{{c.person.name}}" priority>
+        <div class="content">
+          <strong>{{c.person.name}}</strong>
+          <div class="muted">as {{c.character.name}}</div>
+        </div>
       </div>
-    </div>
+    }
   </div>
 
   <h2>Episodes</h2>
   <div>
-    <details *ngFor="let season of seasons()">
-      <summary style="cursor:pointer; padding:8px 0; font-weight:600;">Season {{season[0]}}</summary>
-      <div class="grid">
-        <div class="card" *ngFor="let e of season[1]">
-          <div class="content">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-              <strong>S{{e.season}}E{{e.number}} — {{e.name}}</strong>
-              <button (click)="openTrailer(e)">Trailer</button>
+    @for (season of seasons(); track season[0]) {
+      <details>
+        <summary style="cursor:pointer; padding:8px 0; font-weight:600;">Season {{season[0]}}</summary>
+        <div class="grid">
+          @for (e of season[1]; track e.id) {
+            <div class="card">
+              <div class="content">
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                  <strong>S{{e.season}}E{{e.number}} — {{e.name}}</strong>
+                  <button (click)="openTrailer(e)">Trailer</button>
+                </div>
+                <div class="muted">Air date: {{e.airdate || 'N/A'}}</div>
+                <div [innerHTML]="e.summary"></div>
+              </div>
             </div>
-            <div class="muted">Air date: {{e.airdate || 'N/A'}}</div>
-            <div [innerHTML]="e.summary"></div>
-          </div>
+          }
         </div>
-      </div>
-    </details>
+      </details>
+    }
   </div>
 </section>
