@@ -80,7 +80,7 @@ export class SearchPageComponent {
     return this.shows().slice(start, start + this.pageSize);
   }
   totalPages() {
-    console.log("SHOWS : " + this.shows());
+    console.log("SHOWS : " , this.shows());
     return Math.max(1, Math.ceil(this.shows().length / this.pageSize));
   }
   next() {

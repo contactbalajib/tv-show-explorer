@@ -1,7 +1,7 @@
 <app-loader [show]="loading()"></app-loader>
 <section *ngIf="show() as s">
   <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap: wrap;">
-    <img [ngSrc]="s.image?.original || s.image?.medium || 'https://placehold.co/600x800'" width="300" height="450" alt="{{s.name}}" style="border-radius:8px; object-fit:cover;">
+    <img [ngSrc]="s.image?.original || s.image?.medium || 'https://placehold.co/600x800'" width="300" height="450" alt="{{s.name}}" style="border-radius:8px; object-fit:cover;" priority>
     <div style="flex:1; min-width:260px;">
       <h1 style="margin-top:0;">{{s.name}}</h1>
       <div class="muted">{{s.genres?.join(', ')}}</div>
@@ -48,7 +48,7 @@
   <h2>Cast</h2>
   <div class="grid">
     <div class="card" *ngFor="let c of cast()">
-      <img [src]="c.person.image?.medium || c.person.image?.original || 'https://placehold.co/400x400'" alt="{{c.person.name}}">
+      <img  [src]="c.person.image?.medium || c.person.image?.original || 'https://placehold.co/400x400'" alt="{{c.person.name}}" priority>
       <div class="content">
         <strong>{{c.person.name}}</strong>
         <div class="muted">as {{c.character.name}}</div>
