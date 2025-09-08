@@ -35,7 +35,7 @@ export class ShowDetailPageComponent {
     const showId = this.id();
     let reviews: any[] = [];
     this.reviews.subscribe((r) => (reviews = r));
-    console.log("Reviews for showId ", showId, reviews);
+    //console.log("Reviews for showId ", showId, reviews);
     return showId ? reviews.filter((review) => review.showId === showId) : [];
   });
 
@@ -50,8 +50,8 @@ export class ShowDetailPageComponent {
     // Allow writing to signals within this effect
     effect(
       () => {
-        console.log("this.route.paramMap: ", this.route.paramMap);
-        console.log("this.route.snapshot: ", this.route.snapshot);
+        //console.log("this.route.paramMap: ", this.route.paramMap);
+        //console.log("this.route.snapshot: ", this.route.snapshot);
         const param = this.route.snapshot.paramMap.get("id");
         const id = Number(param);
         this.id.set(id);
@@ -88,6 +88,9 @@ export class ShowDetailPageComponent {
             })
           )
         ).subscribe(({ showTmp, castTmp, episodesTmp }) => {
+          //console.log("showTmp:", showTmp);
+          //console.log("castTmp:", castTmp);
+          //console.log("episodesTmp:", episodesTmp);
           this.show.set(showTmp);
           this.cast.set(castTmp);
           this.episodes.set(episodesTmp);
@@ -110,16 +113,16 @@ export class ShowDetailPageComponent {
    */
   seasons() {
     const groups = new Map<number, Episode[]>();
-    console.log("Episodes : ", this.episodes());
+    //console.log("Episodes : ", this.episodes());
     for (const e of this.episodes()) {
       // The ?? operator is called the nullish coalescing operator in JavaScript and TypeScript.
       // It returns the value on its left if it is not null or undefined; otherwise, it returns the value on its right.
-      console.log("Episode season: ", e.season);
+      //console.log("Episode season: ", e.season);
       const arr = groups.get(e.season) ?? [];
       arr.push(e);
       groups.set(e.season, arr);
     }
-    console.log("Groups : ", groups);
+    //console.log("Groups : ", groups);
 
     //Converts the map to an array of [season, episodes[]] pairs and sorts them by season number.
     return Array.from(groups.entries()).sort((a, b) => a[0] - b[0]);
