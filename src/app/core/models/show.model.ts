@@ -1,5 +1,10 @@
-export interface Rating { average: number | null }
-export interface Image { medium?: string; original?: string }
+export interface Rating {
+  average: number | null;
+}
+export interface Image {
+  medium?: string;
+  original?: string;
+}
 export interface Show {
   id: number;
   name: string;
@@ -11,4 +16,7 @@ export interface Show {
   language?: string;
   network?: { name: string } | null;
 }
-export interface SearchResult { score: number; show: Show }
+export interface SearchResult {
+  score: number;
+  show: Show;
+}

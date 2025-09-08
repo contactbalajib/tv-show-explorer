@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideStore } from '@ngrx/store';
-import { reviewsReducer } from '../../state/reviews/reviews.reducer';
 import { ReviewsPageComponent } from './reviews.page';
+import { reviewsReducer } from 'src/app/state/reviews/reducer';
 
 describe('ReviewsPageComponent', () => {
   beforeEach(async () => {
