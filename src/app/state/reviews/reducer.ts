@@ -1,14 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ReviewsActions from './actions';
+import { Review } from './review.model';
 
 export interface ReviewsState {
-  reviews: any[];
+  reviews: Review[];
   loading: boolean;
   error: any;
 }
 
 export const initialState: ReviewsState = {
-  reviews: [],
+  reviews: [] as Review[],
   loading: false,
   error: null,
 };
@@ -16,8 +17,8 @@ export const initialState: ReviewsState = {
 export const reviewsReducer = createReducer(
   initialState,
   on(ReviewsActions.loadReviews, state => ({ ...state, loading: true })),
-  on(ReviewsActions.loadReviewsSuccess, (state, { reviews }) => ({ ...state, reviews, loading: false })),
-  on(ReviewsActions.loadReviewsFailure, (state, { error }) => ({ ...state, error, loading: false })),
+  //on(ReviewsActions.loadReviewsSuccess, (state, { reviews }) => ({ ...state, reviews, loading: false })),
+  //on(ReviewsActions.loadReviewsFailure, (state, { error }) => ({ ...state, error, loading: false })),
   on(ReviewsActions.addReview, (state, { review }) => ({
     ...state,
     reviews: [...state.reviews, review]

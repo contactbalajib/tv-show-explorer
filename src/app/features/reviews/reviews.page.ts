@@ -24,7 +24,7 @@ export class ReviewsPageComponent {
 
   form = this.fb.group({
     showId: [null as any, [Validators.required, Validators.min(1)]],
-    rating: [3, [Validators.required, Validators.min(1), Validators.max(5)]],
+    rating: [4, [Validators.required, Validators.min(1), Validators.max(5)]],
     comment: ['', [Validators.required, Validators.minLength(5)]]
   });
 
@@ -41,7 +41,7 @@ export class ReviewsPageComponent {
       createdAt: new Date().toISOString()
     };
     this.store.dispatch(ReviewsActions.addReview({ review }));
-    this.form.reset({ showId: null, rating: 3, comment: '' });
+    this.form.reset({ showId: null, rating: 4, comment: '' });
   }
 
   edit(r: Review) {
