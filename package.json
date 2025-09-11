@@ -5,7 +5,9 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --configuration=production",
     "test": "ng test --watch=false",
+    "coverage": "ng test --watch=false --code-coverage",
     "lint": "echo 'No lint configured'"
   },
   "dependencies": {
