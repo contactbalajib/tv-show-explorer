@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ShowDetailPageComponent } from './show-detail.page';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 describe('ShowDetailPageComponent', () => {
   let component: ShowDetailPageComponent;
@@ -13,16 +14,25 @@ describe('ShowDetailPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         ShowDetailPageComponent,
-        HttpClientTestingModule,
-        RouterTestingModule
+        HttpClientTestingModule
       ],
       providers: [
+        provideRouter([]),
         {
           provide: ActivatedRoute,
           useValue: {
             params: of({ id: '1' }),
-            snapshot: { params: { id: '1' } }
+            snapshot: {
+              params: { id: '1' },
+              paramMap: {
+                get: (key: string) => key === 'id' ? '1' : null
+              }
+            }
           }
+        },
+        {
+          provide: Store,
+          useValue: { select: () => of([]) }
         }
       ]
     }).compileComponents();
