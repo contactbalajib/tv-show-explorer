@@ -37,7 +37,7 @@ export class SearchPageComponent {
   shows = signal<Show[]>([]);
 
   page = signal(1);
-  pageSize = 3;
+  pageSize = 4;
 
   form = this.fb.group({
     q: ["", [Validators.required, Validators.minLength(3)]],

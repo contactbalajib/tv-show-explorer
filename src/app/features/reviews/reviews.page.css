@@ -96,20 +96,25 @@
 }
 
 /* Form and general styling improvements */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  grid-column: span 1;
+}
+
 .form-field label {
-  display: block;
+  font-weight: 600;
   margin-bottom: 4px;
-  font-weight: 500;
 }
 
 .form-field input,
 .form-field select,
 .form-field textarea {
-  width: 100%;
   padding: 8px;
-  border: 1px solid #ddd;
+  font-size: 1em;
   border-radius: 4px;
-  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: 4px;
 }
 
 .form-field input:focus,
@@ -188,5 +193,38 @@ button[style*="background:#b00020"] {
 
 button[style*="background:#b00020"]:hover:not(:disabled) {
   background: #8f0019 !important;
+}
+
+/* Reviews form styling */
+.reviews-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto 24px auto;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.clear-btn {
+  background: #b00020;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .reviews-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 

@@ -5,7 +5,7 @@
   <div>Loading...</div>
 }
 
-<form [formGroup]="form" (ngSubmit)="editingId()? update() : submit()" class="grid" style="grid-template-columns: 1fr 1fr;">
+<form [formGroup]="form" (ngSubmit)="editingId()? update() : submit()" class="reviews-form">
   <div class="form-field">
     <label>Show ID</label>
     <input type="number" formControlName="showId" placeholder="Enter show ID (from URL)">
@@ -21,19 +21,19 @@
       }
     </select>
   </div>
-  <div class="form-field" style="grid-column: 1/-1;">
+  <div class="form-field">
     <label>Comments</label>
     <textarea rows="3" formControlName="comment" placeholder="Your thoughts..."></textarea>
     @if (form.get('comment')?.touched && form.get('comment')?.invalid) {
       <div class="error">Comment is required (min 5 chars)</div>
     }
   </div>
-  <div style="grid-column: 1/-1; display:flex; gap:8px;">
+  <div class="form-actions">
     <button type="submit" [disabled]="form.invalid || (loading | async)">{{editingId()? 'Update' : 'Add'}} Review</button>
     @if (editingId()) {
       <button type="button" (click)="cancel()">Cancel</button>
     }
-    <button (click)="clearAllReviews()" [disabled]="(reviews | async)?.length === 0" style="background: #b00020;">Clear All</button>
+    <button (click)="clearAllReviews()" [disabled]="(reviews | async)?.length === 0" class="clear-btn">Clear All</button>
   </div>
 </form>
 
@@ -46,7 +46,7 @@
   <div class="grid">
     @for (review of (reviews | async); track review.id) {
       <div class="card">
-        <div class="content">
+        <div class="content"> 
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <strong>Show #{{review.showId}}</strong>
             <span class="badge">⭐ {{review.rating}}</span>
