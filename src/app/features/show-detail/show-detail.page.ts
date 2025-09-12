@@ -77,9 +77,11 @@ export class ShowDetailPageComponent {
         // });
 
 
-        // Wait 500ms before starting API calls
+        // Wait 300ms before starting API calls
         of(null).pipe(
-          delay(100),  //Added delay (in milliseconds) intentionally to showcase the loading state
+          //Added delay (in milliseconds) intentionally to showcase the loading state
+          delay(300),  
+          //The RxJS switchMap operator is used to switch from one observable stream to another. When a new value arrives, switchMap cancels the previous inner observable and subscribes to the new one. This is useful for scenarios like API calls in response to user input, ensuring only the latest request is processed and previous ones are ignored.
           switchMap(() =>
             forkJoin({
               showTmp: this.api.getShow(id),
@@ -88,6 +90,7 @@ export class ShowDetailPageComponent {
             })
           )
         ).subscribe(({ showTmp, castTmp, episodesTmp }) => {
+
           //console.log("showTmp:", showTmp);
           //console.log("castTmp:", castTmp);
           //console.log("episodesTmp:", episodesTmp);
@@ -95,6 +98,20 @@ export class ShowDetailPageComponent {
           this.cast.set(castTmp);
           this.episodes.set(episodesTmp);
           this.loading.set(false);
+
+          // next: ({ showTmp, castTmp, episodesTmp }) => {
+          //   this.show.set(showTmp);
+          //   this.cast.set(castTmp);
+          //   this.episodes.set(episodesTmp);
+          //   this.loading.set(false);
+          // },
+          // error: (err) => {
+          //   this.loading.set(false);
+          //   this.show.set(null);
+          //   this.cast.set([]);
+          //   this.episodes.set([]);
+          //   console.error('Failed to load show/cast/episode details:', err);
+          // }
         });
       },
       { allowSignalWrites: true }
